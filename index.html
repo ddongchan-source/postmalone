@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Samsung Sharp Sans - Regular */
+@font-face {
+    font-family: 'Samsung Sharp Sans';
+    src: url('samsungsharpsans.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Samsung Sharp Sans - Medium */
+@font-face {
+    font-family: 'Samsung Sharp Sans';
+    src: url('samsungsharpsans-medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* Samsung Sharp Sans - Bold */
+@font-face {
+    font-family: 'Samsung Sharp Sans';
+    src: url('samsungsharpsans-bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* 전체 페이지 폰트 적용 */
+body {
+    font-family: 'Samsung Sharp Sans', sans-serif;
+    font-weight: 400;
+}
+
+/* 네비게이션 폰트 */
+.navi {
+    font-family: 'Samsung Sharp Sans', sans-serif;
+    font-weight: 700;
+}
+
+/* 콘텐츠 제목 */
+.content h2 {
+    font-weight: 700;
+}
+
+/* 본문 */
+.content p {
+    font-weight: 400;
+}
+        body{
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+            background-color: rgb(0, 0, 0);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navi {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            width: 100%;
+            height: 100px;
+
+            color: rgb(229, 255, 0);
+            font-size: 32px;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            z-index: 100;
+            background-color: rgb(0, 0, 0);
+        }
+        
+        .area {
+            width: 900px;
+            min-height: 400px;
+            margin: 100px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            overflow: hidden;
+            padding: 50px;
+            border-radius: 20px;
+            
+        }
+        
+        .selected{
+            background-color: rgb(15, 15, 15);
+            border: 1px solid rgb(229, 255, 0);
+            color: rgb(229, 255, 0);
+        }
+        div.status-bar{
+            display: flex;
+            width: 0;
+            height: 10px;
+            background-color: rgb(229, 255, 0);
+            position: fixed;
+            
+            border-radius: 10px;
+            z-index: 101;
+        }
+        
+
+    
+
+        .photo,
+        .content {
+            flex: 1;
+            opacity: 0;
+            transition:
+                transform 0.9s ease,
+                opacity 0.9s ease;
+                
+        }
+
+        .photo {
+            transform: translateY(100px);
+            
+        }
+
+        .content {
+            transform: translateX(100px);
+        }
+
+        .photo img {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+
+
+        .area.selected .photo,
+        .area.selected .content {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+
+        .area.selected .content {
+            transition-delay: 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="navi">Post-Malone Playlist</div>
+    <div class="status-bar"></div>
+
+    <div class="area">
+    <div class="photo">
+        <img src="goodbye.jpg" alt="첫 번째 이미지">
+    </div>
+
+    <div class="content">
+        <h2>Goodbye</h2>
+        <p>
+            A bittersweet goodbye wrapped in a hazy atmosphere.
+Melodies that linger long after the moment has passed.
+        </p>
+    </div>
+</div>
+<div class="area">
+    <div class="photo">
+        <img src="over.jpg" alt="첫 번째 이미지">
+    </div>
+
+    <div class="content">
+        <h2>Overdrive</h2>
+        <p>
+            Late-night drives and endless possibilities.
+Let the rhythm take control and leave everything behind.
+        </p>
+    </div>
+</div>
+<div class="area">
+    <div class="photo">
+        <img src="saint.jpg" alt="첫 번째 이미지">
+    </div>
+
+    <div class="content">
+        <h2>Saint-Tropez</h2>
+        <p>
+            Champagne nights, summer skies, and a taste of luxury.
+A soundtrack for living life without limits.
+        </p>
+    </div>
+</div>
+<div class="area">
+    <div class="photo">
+        <img src="psycho.jpg" alt="첫 번째 이미지">
+    </div>
+
+    <div class="content">
+        <h2>Psycho</h2>
+        <p>
+            Dark melodies meet a hypnotic rhythm.
+Caught between obsession, desire, and the chaos of love.
+        </p>
+    </div>
+</div>
+<div class="area">
+    <div class="photo">
+        <img src="sunflower.jpg" alt="첫 번째 이미지">
+    </div>
+
+    <div class="content">
+        <h2>Sunflower</h2>
+        <p>
+            A warm melody that feels like a familiar memory.
+No matter how far you go, some feelings never fade.
+        </p>
+    </div>
+</div>
+    
+    
+</body>
+
+<script>
+   const bodyTag = document.querySelector("body");
+const areaTags = document.querySelectorAll(".area");
+
+
+areaTags[0].classList.add("selected");
+
+document.addEventListener("scroll", function () {
+    areaTags.forEach(function (area) {
+        const rect = area.getBoundingClientRect();
+
+        if (
+            rect.top < window.innerHeight * 0.55 &&
+            rect.bottom > window.innerHeight * 0.45
+        ) {
+            area.classList.add("selected");
+        } else {
+            area.classList.remove("selected");
+        }
+    });
+});
+
+    const statusBar = document.querySelector("div.status-bar");
+
+    document.addEventListener("scroll", function() {
+        console.log(window.scrollY);
+
+        const bodyHeight = bodyTag.getBoundingClientRect().height;
+
+        let scrollableHeight = bodyHeight - window.innerHeight;
+
+        let scrollWidth = window.scrollY / scrollableHeight * window.innerWidth;
+
+        statusBar.style.width = scrollWidth + "px";
+    });
+</script>
+</html>
